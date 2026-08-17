@@ -15,35 +15,18 @@ datasets = {
     "category_translation": "product_category_name_translation.csv"
 }
 
-print("=" * 70)
-print("MISSING VALUE ANALYSIS")
-print("=" * 70)
-
 for name, filename in datasets.items():
-
     file_path = os.path.join(DATA_PATH, filename)
-
     df = pd.read_csv(file_path)
-
     missing_count = df.isnull().sum()
     missing_percentage = (missing_count / len(df) * 100).round(2)
-
     result = pd.DataFrame({
         "Missing Count": missing_count,
         "Missing %": missing_percentage
     })
-
     result = result[result["Missing Count"] > 0]
-
-    print("\n" + "-" * 70)
     print(f"Dataset: {name}")
-    print("-" * 70)
-
     if result.empty:
         print("No missing values.")
     else:
         print(result)
-
-print("\n" + "=" * 70)
-print("MISSING VALUE ANALYSIS COMPLETED")
-print("=" * 70)
